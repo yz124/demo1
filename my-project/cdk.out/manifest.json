@@ -1,0 +1,76 @@
+{
+  "version": "20.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "MyProjectStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "MyProjectStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "MyProjectStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://853539536475/us-east-1",
+      "properties": {
+        "templateFile": "MyProjectStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::853539536475:role/cdk-hnb659fds-deploy-role-853539536475-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::853539536475:role/cdk-hnb659fds-cfn-exec-role-853539536475-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-853539536475-us-east-1/c7b3136a0202333c8dfebdd295e0601dc91d65529e68036a26355f12a8559627.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "MyProjectStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::853539536475:role/cdk-hnb659fds-lookup-role-853539536475-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "MyProjectStack.assets"
+      ],
+      "metadata": {
+        "/MyProjectStack/MyBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyBucketF68F3FF0"
+          }
+        ],
+        "/MyProjectStack/MyCfnService": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyCfnService"
+          }
+        ],
+        "/MyProjectStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/MyProjectStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/MyProjectStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "MyProjectStack"
+    }
+  }
+}

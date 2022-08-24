@@ -1,0 +1,87 @@
+{
+ "Resources": {
+  "MyBucketF68F3FF0": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "MyProjectStack/MyBucket/Resource"
+   }
+  },
+  "MyCfnService": {
+   "Type": "AWS::AppRunner::Service",
+   "Properties": {
+    "SourceConfiguration": {
+     "AuthenticationConfiguration": {
+      "AccessRoleArn": "arn:aws:iam::853539536475:role/service-role/AppRunnerECRAccessRole"
+     },
+     "AutoDeploymentsEnabled": false,
+     "ImageRepository": {
+      "ImageConfiguration": {
+       "Port": "80",
+       "StartCommand": "/start.sh"
+      },
+      "ImageIdentifier": "853539536475.dkr.ecr.us-east-1.amazonaws.com/yidemo:latest",
+      "ImageRepositoryType": "ECR"
+     }
+    },
+    "InstanceConfiguration": {
+     "Cpu": "1 vCPU",
+     "Memory": "2 GB"
+    },
+    "ServiceName": "yidemo2"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MyProjectStack/MyCfnService"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/yWLQQ6CMBBFz8K+HVIxylpvAAcwYxnJUClk2sqi4e6WsPrvv/x/gaYFU+EWtB2c/vIbch/ROlXUK4cG8iNZR1E9P/6kXeG6SvKeBIrsSX5saT8GHYUlyVHGxYC5Q1sPKBv7GmW+XaspMOtyjTwTdGf+AShjLn2CAAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MyProjectStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

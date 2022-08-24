@@ -1,0 +1,107 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.71"
+        }
+      },
+      "MyProjectStack": {
+        "id": "MyProjectStack",
+        "path": "MyProjectStack",
+        "children": {
+          "MyBucket": {
+            "id": "MyBucket",
+            "path": "MyProjectStack/MyBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "MyProjectStack/MyBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "versioningConfiguration": {
+                      "status": "Enabled"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.38.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.38.1"
+            }
+          },
+          "MyCfnService": {
+            "id": "MyCfnService",
+            "path": "MyProjectStack/MyCfnService",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::AppRunner::Service",
+              "aws:cdk:cloudformation:props": {
+                "sourceConfiguration": {
+                  "authenticationConfiguration": {
+                    "accessRoleArn": "arn:aws:iam::853539536475:role/service-role/AppRunnerECRAccessRole"
+                  },
+                  "autoDeploymentsEnabled": false,
+                  "imageRepository": {
+                    "imageConfiguration": {
+                      "port": "80",
+                      "startCommand": "/start.sh"
+                    },
+                    "imageIdentifier": "853539536475.dkr.ecr.us-east-1.amazonaws.com/yidemo:latest",
+                    "imageRepositoryType": "ECR"
+                  }
+                },
+                "instanceConfiguration": {
+                  "cpu": "1 vCPU",
+                  "memory": "2 GB"
+                },
+                "serviceName": "yidemo2"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apprunner.CfnService",
+              "version": "2.38.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "MyProjectStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "MyProjectStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.38.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.71"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.38.1"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.38.1"
+    }
+  }
+}
